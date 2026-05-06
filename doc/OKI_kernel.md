@@ -22,7 +22,7 @@
 ### 2.Fork [cctv18](https://github.com/cctv18) 的内核项目
 - OKI内核6.1系列 https://github.com/cctv18/oppo_oplus_realme_sm8650
 - OKI内核6.6系列 https://github.com/cctv18/oppo_oplus_realme_sm8750
-- OKI内核6.12系列 https://github.com/cctv18/oppo_oplus_realme_sm8850
+- OKI,GKI内核6.12系列 https://github.com/cctv18/oppo_oplus_realme_sm8850
 
 例子:若你的设备是`一加ace5Pro`，发现你的内核版本为`6.6.xxx`:
 
