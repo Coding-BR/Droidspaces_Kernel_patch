@@ -30,52 +30,14 @@
 
 >[!WARNING]
 >请选择你对应的手机内核版本的项目，一旦选错，100%不开机
-### 3.添加对 `DroidSpaces` 的支持
-1. 先回到本项目中,查看表格中的 `说明` ,选择对应Droidspaces版本号的补丁(建议选择 ≥ v5.9.5 的) 
-2. 进入 <ins>/OKI/对应版本号</ins> 文件夹，复制补丁的`Raw`链接
-3. 打开你 `Fork项目` 里的 <ins>/.github/workflows</ins> 文件夹，挑选对应版本号的 `yml文件`
-4. 编辑文件，在 `构建内核` 流程前，插入并应用补丁开启配置
+>
+>我在写这个教程的时候，作者已经添加了对 `Droidspaces` 的实验性支持，我看了看代码，基本没有问题
+>
+>但还是要备份好你的手机对应的原 `Boot` 文件
 
-例子:若你的设备是`一加ace5Pro`，发现你的内核版本为`6.6.89`:
-
-第三步
-
-![第三步](./Image/OKI_2.jpg)
-
-第四步,下面文本为例子(可以继续加NTsync补丁和配置)
-
-```yml
-      - name: 注入DroidSpaces内核配置
-        run: |
-            cd kernel_workspace/common
-            wget https://raw.githubusercontent.com/Goldzxcbug/Droidspaces_Kernel_patch/refs/heads/main/OKI/6.6/Kernel_6.6.patch
-            patch -p1 < 'Kernel_6.6.patch'            
-            cd ../
-            # 修复 [✗] PID namespace 和 [✗] IPC namespace
-              echo "CONFIG_SYSVIPC=y" >> ./common/arch/arm64/configs/gki_defconfig
-              echo "CONFIG_POSIX_MQUEUE=y" >> ./common/arch/arm64/configs/gki_defconfig
-              echo "CONFIG_NAMESPACES=y" >> ./common/arch/arm64/configs/gki_defconfig
-              echo "CONFIG_PID_NS=y" >> ./common/arch/arm64/configs/gki_defconfig
-              echo "CONFIG_IPC_NS=y" >> ./common/arch/arm64/configs/gki_defconfig
-              
-            # 修复 [✗] devtmpfs support
-              echo "CONFIG_DEVTMPFS=y" >> ./common/arch/arm64/configs/gki_defconfig
-      - name: 注入NTsync内核配置（可选）
-        run: |
-            cd kernel_workspace/common
-            wget "https://raw.githubusercontent.com/Goldzxcbug/Droidspaces_Kernel_patch/refs/heads/main/NTsync/ntsync_base.patch"
-            wget "https://raw.githubusercontent.com/Goldzxcbug/Droidspaces_Kernel_patch/refs/heads/main/NTsync/ntsync_compat_android15-6.6.patch"
-            patch -p1 < 'ntsync_base.patch'
-            patch -p1 < 'ntsync_compat_android15-6.6.patch'            
-            cd ../
-            #开启NTsync内核配置
-            echo "CONFIG_NTSYNC=y" >> ./common/arch/arm64/configs/gki_defconfig
-
-```
-![第四步](./Image/OKI_3.jpg)
 ### 4.手动触发Actions的对应工作流，等待20min左右的AK3出炉
 #### 建议配置
-1. KernelSU分支选择none,关闭susfs
+1. KernelSU分支选择none,关闭susfs，开启Droidspaces的`standard`模式
 2. 安装 lz4 1.10.0+zstd 1.5.7 补丁
 3. 开启网络功能拓展配置(用于为ipset及需要iptables等高级网络功能内核支持的程序提供支持)
 4. 启用ADIOS IO调度器支持(提升IO读写性能)
