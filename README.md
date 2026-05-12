@@ -32,7 +32,7 @@
 >- [GKI内核云编译指南](./doc/GKI_kernel.md)
 
 
-## Droidspaecs ≥ v5.9.5 所要配置
+## Droidspaces ≥ v5.9.5 所要配置
 ```txt
 # IPC
 CONFIG_SYSVIPC=y
@@ -46,7 +46,7 @@ CONFIG_PID_NS=y
 CONFIG_DEVTMPFS=y
 ```
 
-## Droidspaecs < v5.9.5 所要配置
+## Droidspaces < v5.9.5 所要配置
 ```txt
 # 修复 [✗] PID namespace 和 [✗] IPC
 CONFIG_SYSCTL=y
@@ -66,7 +66,7 @@ CONFIG_CGROUP_DEVICE=y
 CONFIG_CGROUP_PIDS=y
 CONFIG_MEMCG=y
 ```
-## Droidspaecs 格外配置（可选）
+## Droidspaces 格外配置（可选）
 ```txt
 #网络（Docker/NAT支持）
 CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=y
