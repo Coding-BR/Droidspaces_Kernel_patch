@@ -81,6 +81,10 @@ CONFIG_IP_SET=y
 CONFIG_IP_SET_HASH_IP=y
 CONFIG_IP_SET_HASH_NET=y
 CONFIG_NETFILTER_XT_SET=y
+
+# 在 tmpfs 上启用 xattr 支持
+# (运行 NixOS 必备选项)
+CONFIG_TMPFS_XATTR=y
 ```
 ## NTsync 所要配置
 ```txt
